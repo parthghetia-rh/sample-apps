@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: python-sample
+    eventlistener: python-sample
+  name: el-python-sample
+  namespace: python-sample
+spec:
+  port:
+    targetPort: http-listener
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: el-python-sample

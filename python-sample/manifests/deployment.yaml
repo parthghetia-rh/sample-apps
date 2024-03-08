@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: python-sample
+  name: python-sample
+  namespace: python-sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-sample
+  template:
+    metadata:
+      labels:
+        app: python-sample
+        deployment: python-sample
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/python-sample/python-sample:latest
+        imagePullPolicy: Always
+        name: python-sample

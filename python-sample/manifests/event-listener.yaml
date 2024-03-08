@@ -1,0 +1,13 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: python-sample
+  namespace: python-sample
+spec:
+  triggers:
+    - name: python-sample
+      bindings:
+        - ref: python-sample
+          kind: TriggerBinding
+      template:
+        ref: python-sample
