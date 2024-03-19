@@ -17,6 +17,6 @@ spec:
         deployment: python-sample
     spec:
       containers:
-      - image: image-registry.openshift-image-registry.svc:5000/python-sample/python-sample:latest
+      - image: image-registry.openshift-image-registry.svc:5000/pipelines-demo/python-sample:latest
         imagePullPolicy: Always
         name: python-sample
