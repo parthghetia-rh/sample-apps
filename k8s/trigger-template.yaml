@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate 
 metadata: 
   name: python-sample
-  namespace: python-sample
+  namespace: pipelines-demo
   labels:
     app: python-sample
 spec: 

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: python-sample
-  namespace: python-sample
+  namespace: pipelines-demo
 spec:
   accessModes:
     - ReadWriteOnce

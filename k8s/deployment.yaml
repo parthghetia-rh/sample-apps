@@ -4,7 +4,7 @@ metadata:
   labels:
     app: python-sample
   name: python-sample
-  namespace: python-sample
+  namespace: pipelines-demo
 spec:
   replicas: 1
   selector:
