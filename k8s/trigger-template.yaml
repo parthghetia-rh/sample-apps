@@ -1,44 +1,43 @@
-apiVersion: triggers.tekton.dev/v1alpha1 
-kind: TriggerTemplate 
-metadata: 
-  name: python-sample
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: pipelines-demo
   namespace: pipelines-demo
-  labels:
-    app: python-sample
-spec: 
-  params: 
-    - name: gitrevision 
-    - name: gitrepositoryurl
-  resourcetemplates: 
-    - apiVersion: tekton.dev/v1beta1 
-      kind: PipelineRun 
-      metadata:
-        generateName: python-sample-
-        app: python-sample
-      spec:
-        params:
-          - name: WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND
-            value: 'true'
-          - name: deployment-name
-            value: python-sample
-          - name: git-url
-            value: $(tt.params.gitrepositoryurl)
-          - name: git-revision
-            value: $(tt.params.gitrevision)
-          - name: IMAGE
-            value: >-
-              image-registry.openshift-image-registry.svc:5000/python-sample/python-sample:latest
-          - name: TLSVERIFY
-            value: 'false'
-          - name: working-dir
-            value: /
-        pipelineRef: 
-          name: python-sample
-        workspaces:
-        - name: basic-auth
-          secret:
-            secretName: github-creds
-        - name: shared-workspace
-          persistentvolumeclaim:
-            claimName: python-sample
+spec:
+  params:
+  - name: git-repo-url
+    description: The git repository url
+  - name: git-revision
+    description: The git revision
+    default: master
+  - name: git-repo-name
+    description: The name of the deployment to be created / patched
 
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1
+    kind: PipelineRun
+    metadata:
+      generateName: build-deploy-$(tt.params.git-repo-name)-
+    spec:
+      taskRunTemplate:
+        serviceAccountName: pipeline
+      pipelineRef:
+        name: build-and-deploy
+      params:
+      - name: deployment-name
+        value: python-sample
+      - name: git-url
+        value: $(tt.params.git-repo-url)
+      - name: git-revision
+        value: $(tt.params.git-revision)
+      - name: IMAGE
+        value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/python-sample
+      workspaces:
+      - name: shared-workspace
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 500Mi
