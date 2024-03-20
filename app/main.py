@@ -1,12 +1,13 @@
-from flask import Flask
-import time
+from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
 @app.route('/')
-def main():
-  return "Good morning all who inhabit it!!!!!!???"
+def index():
+    # Define the text to display
+    message = "Good morning all who inhabit it!!!!!!???"
+    # Render the template with the message
+    return render_template_string('<html><head><title>Beautiful Text</title></head><body><div style="font-size: 3em; text-align: center; margin-top: 20%;">{{ message }}</div></body></html>', message=message)
 
 if __name__ == '__main__':
-  port = 8080
-  app.run(port=port,host='0.0.0.0') 
+    app.run(debug=True)
