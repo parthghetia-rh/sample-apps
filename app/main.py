@@ -1,10 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask
+import time
 
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def main():
+  return "Good morning all who inhabit it!!!!!!"
 
 if __name__ == '__main__':
   port = 8080
