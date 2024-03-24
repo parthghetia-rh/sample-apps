@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-  return "Welcome to my  End to End Baseline Video!!!"
+  return "People of the world! Welcome!"
 
 if __name__ == '__main__':
   port = 8080
