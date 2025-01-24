@@ -5,3 +5,7 @@ secretGenerator:
 resources:
   - mysql-deployment.yaml
   - wordpress-deployment.yaml
+
+# oc new-app mariadb-ephemeral
+# oc new-app php~https://github.com/wordpress/wordpress
+# oc expose svc/wordpress - give it a while
