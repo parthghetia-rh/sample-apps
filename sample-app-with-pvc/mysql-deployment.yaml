@@ -31,7 +31,7 @@ metadata:
   name: wordpress-mysql
   labels:
     app: wordpress
-spec:
+spec:   
   selector:
     matchLabels:
       app: wordpress
