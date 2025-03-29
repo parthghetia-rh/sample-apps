@@ -9,3 +9,6 @@ resources:
 # oc new-app mariadb-ephemeral
 # oc new-app php~https://github.com/wordpress/wordpress
 # oc expose svc/wordpress - give it a while
+
+# sample python app
+# oc new-app https://github.com/OpenShiftDemos/os-sample-python.git
