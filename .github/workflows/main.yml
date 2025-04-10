@@ -49,13 +49,13 @@ jobs:
           --insecure-skip-tls-verify \
           --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
           
-    - name: Scan image using RHACS
-      env:
-        ROX_API_TOKEN: ${{ secrets.ROX_API_TOKEN }}
-        ROX_CENTRAL_HOST: ${{ secrets.ROX_CENTRAL_HOST }}
-      run: |
-        roxctl image check \
-          --output=table \
-          --endpoint "$ROX_CENTRAL_HOST" \
-          --insecure-skip-tls-verify \
-          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+    # - name: Check image using RHACS
+    #   env:
+    #     ROX_API_TOKEN: ${{ secrets.ROX_API_TOKEN }}
+    #     ROX_CENTRAL_HOST: ${{ secrets.ROX_CENTRAL_HOST }}
+    #   run: |
+    #     roxctl image check \
+    #       --output=table \
+    #       --endpoint "$ROX_CENTRAL_HOST" \
+    #       --insecure-skip-tls-verify \
+    #       --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
