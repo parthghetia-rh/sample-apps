@@ -35,7 +35,7 @@ jobs:
         docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
 
     - name: Install roxctl
-      uses: stackrox/actions/install-roxctl@v1
+      uses: stackrox/roxctl-installer-action@v1.1.3
 
     - name: Scan image using RHACS
       env:
