@@ -59,9 +59,3 @@ jobs:
     #       --endpoint "$ROX_CENTRAL_HOST" \
     #       --insecure-skip-tls-verify \
     #       --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
-    - name: deploy to k8s
-      uses: Azure/k8s-deploy@v5
-      with:
-         manifests: |
-            k8s/deployment.yaml
-         images: "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
