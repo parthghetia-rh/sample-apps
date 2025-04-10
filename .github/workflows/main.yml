@@ -46,5 +46,4 @@ jobs:
         roxctl image scan \
           --endpoint "$ROX_CENTRAL_HOST" \
           --insecure-skip-tls-verify \
-          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG" \
-          --token "$ROX_API_TOKEN"
+          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
