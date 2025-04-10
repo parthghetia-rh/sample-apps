@@ -1,0 +1,49 @@
+name: CI/CD with RHACS Scan
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  IMAGE_NAME: pipeline-demo
+  IMAGE_TAG: ${{ github.sha }}
+  REGISTRY: innovative-quay-quay-registry.apps.parth-rosa-acm.orfh.p1.openshiftapps.com/quayadmin
+
+jobs:
+  build-scan-push:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Quay.io
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
+
+    - name: Push Docker image
+      run: |
+        docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+
+    - name: Install roxctl
+      uses: stackrox/actions/install-roxctl@v1
+
+    - name: Scan image using RHACS
+      env:
+        ROX_API_TOKEN: ${{ secrets.ROX_API_TOKEN }}
+        ROX_CENTRAL_HOST: ${{ secrets.ROX_CENTRAL_HOST }}
+      run: |
+        roxctl image scan \
+          --endpoint "$ROX_CENTRAL_HOST" \
+          --insecure-skip-tls-verify \
+          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG" \
+          --token "$ROX_API_TOKEN"
