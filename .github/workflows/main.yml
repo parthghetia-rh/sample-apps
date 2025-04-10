@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: quayadmin/pipeline-demo
-  IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: latest
   REGISTRY: innovative-quay-quay-registry.apps.parth-rosa-acm.orfh.p1.openshiftapps.com
 
 jobs:
