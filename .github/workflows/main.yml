@@ -68,4 +68,4 @@ jobs:
           --output=table \
           --endpoint "$ROX_CENTRAL_HOST" \
           --insecure-skip-tls-verify \
-          --file=./k8s/deployment.yaml"
+          --file=/k8s/deployment.yaml"
