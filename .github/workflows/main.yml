@@ -44,6 +44,7 @@ jobs:
         ROX_CENTRAL_HOST: ${{ secrets.ROX_CENTRAL_HOST }}
       run: |
         roxctl image scan \
+          --output=table \
           --endpoint "$ROX_CENTRAL_HOST" \
           --insecure-skip-tls-verify \
           --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
