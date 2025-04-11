@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insecure-deployment
+  labels:
+    app: insecure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insecure-app
+  template:
+    metadata:
+      labels:
+        app: insecure-app
+    spec:
+      containers:
+        - name: insecure-container
+          image: docker.io/library/nginx:latest
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 0
+            privileged: true
+            allowPrivilegeEscalation: true
+          ports:
+            - containerPort: 80
+          env:
+            - name: SECRET_KEY
+              value: supersecret
+          volumeMounts:
+            - name: host-volume
+              mountPath: /data
+      volumes:
+        - name: host-volume
+          hostPath:
+            path: /var/lib
+            type: Directory
+
