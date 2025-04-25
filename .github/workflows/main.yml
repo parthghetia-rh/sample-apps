@@ -47,7 +47,8 @@ jobs:
           --output=table \
           --endpoint "$ROX_CENTRAL_HOST" \
           --insecure-skip-tls-verify \
-          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+          --image "$REGISTRY/$IMAGE_NAME:$IMAGE_TAG" \
+          --severity CRITICAL,IMPORTANT
           
     - name: Check image using RHACS
       env:
