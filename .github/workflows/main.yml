@@ -33,6 +33,10 @@ jobs:
     
     - name: Install roxctl
       uses: stackrox/roxctl-installer-action@v1.1.3
+    
+    - name: Push Docker image
+      run: |
+        docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
 
     - name: Scan image using RHACS
       env:
@@ -65,8 +69,3 @@ jobs:
           --endpoint "$ROX_CENTRAL_HOST" \
           --insecure-skip-tls-verify \
           --file=./k8s/deployment.yaml
-  
-
-    - name: Push Docker image
-      run: |
-        docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
