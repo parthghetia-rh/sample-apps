@@ -4,7 +4,7 @@ metadata:
   labels:
     app: python-sample
   name: python-sample
-  namespace: parth-demo
+  # namespace: parth-demo
 spec:
   ports:
   - name: 8080-tcp
