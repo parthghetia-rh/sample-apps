@@ -1,7 +1,1 @@
-# Slot Sniper
-beautifulsoup4>=4.12.0
-playwright>=1.40.0
-python-dotenv>=1.0.0
-
-# Optional: use python-telegram-bot for richer Telegram features (current code uses raw API)
-# python-telegram-bot>=20.0
+Flask>=3.0.0
